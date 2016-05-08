@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:ns="http://service.org.com"
+                  xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:ax21="http://beans.org.com/xsd"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:ns1="http://org.apache.axis2/xsd"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  targetNamespace="http://service.org.com">
+   <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+   <wsdl:types>
+      <xs:schema attributeFormDefault="qualified"
+                 elementFormDefault="qualified"
+                 targetNamespace="http://beans.org.com/xsd">
+         <xs:complexType name="Item">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="available" type="xs:boolean"/>
+               <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+               <xs:element minOccurs="0" name="number" nillable="true" type="xs:string"/>
+               <xs:element minOccurs="0" name="price" type="xs:int"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="User">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="password" nillable="true" type="xs:string"/>
+               <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+      </xs:schema>
+      <xs:schema xmlns:ax22="http://beans.org.com/xsd"
+                 attributeFormDefault="qualified"
+                 elementFormDefault="qualified"
+                 targetNamespace="http://service.org.com">
+         <xs:import namespace="http://beans.org.com/xsd"/>
+         <xs:element name="getAvailableItems">
+            <xs:complexType>
+               <xs:sequence/>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="getAvailableItemsResponse">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element maxOccurs="unbounded"
+                              minOccurs="0"
+                              name="return"
+                              nillable="true"
+                              type="ax22:Item"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="hasItem">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element minOccurs="0" name="inId" nillable="true" type="xs:string"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="hasItemResponse">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="getPaymentAmount">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element minOccurs="0" name="user" nillable="true" type="ax22:User"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="getPaymentAmountResponse">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element minOccurs="0" name="return" type="xs:int"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="login">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
+                  <xs:element minOccurs="0" name="password" nillable="true" type="xs:string"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="loginResponse">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="payForOrder">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element minOccurs="0" name="user" nillable="true" type="ax22:User"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="buyItem">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element minOccurs="0" name="user" nillable="true" type="ax22:User"/>
+                  <xs:element minOccurs="0" name="itemnum" nillable="true" type="xs:string"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="buyItemResponse">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="cancelOrder">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element minOccurs="0" name="user" nillable="true" type="ax22:User"/>
+                  <xs:element minOccurs="0" name="itemnum" nillable="true" type="xs:string"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="cancelOrderResponse">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:schema>
+   </wsdl:types>
+   <wsdl:message name="cancelOrderRequest">
+      <wsdl:part name="parameters" element="ns:cancelOrder"/>
+   </wsdl:message>
+   <wsdl:message name="cancelOrderResponse">
+      <wsdl:part name="parameters" element="ns:cancelOrderResponse"/>
+   </wsdl:message>
+   <wsdl:message name="getAvailableItemsRequest">
+      <wsdl:part name="parameters" element="ns:getAvailableItems"/>
+   </wsdl:message>
+   <wsdl:message name="getAvailableItemsResponse">
+      <wsdl:part name="parameters" element="ns:getAvailableItemsResponse"/>
+   </wsdl:message>
+   <wsdl:message name="hasItemRequest">
+      <wsdl:part name="parameters" element="ns:hasItem"/>
+   </wsdl:message>
+   <wsdl:message name="hasItemResponse">
+      <wsdl:part name="parameters" element="ns:hasItemResponse"/>
+   </wsdl:message>
+   <wsdl:message name="payForOrderRequest">
+      <wsdl:part name="parameters" element="ns:payForOrder"/>
+   </wsdl:message>
+   <wsdl:message name="getPaymentAmountRequest">
+      <wsdl:part name="parameters" element="ns:getPaymentAmount"/>
+   </wsdl:message>
+   <wsdl:message name="getPaymentAmountResponse">
+      <wsdl:part name="parameters" element="ns:getPaymentAmountResponse"/>
+   </wsdl:message>
+   <wsdl:message name="loginRequest">
+      <wsdl:part name="parameters" element="ns:login"/>
+   </wsdl:message>
+   <wsdl:message name="loginResponse">
+      <wsdl:part name="parameters" element="ns:loginResponse"/>
+   </wsdl:message>
+   <wsdl:message name="buyItemRequest">
+      <wsdl:part name="parameters" element="ns:buyItem"/>
+   </wsdl:message>
+   <wsdl:message name="buyItemResponse">
+      <wsdl:part name="parameters" element="ns:buyItemResponse"/>
+   </wsdl:message>
+   <wsdl:portType name="OrderProcessingPortType">
+      <wsdl:operation name="cancelOrder">
+         <wsdl:input message="ns:cancelOrderRequest" wsaw:Action="urn:cancelOrder"/>
+         <wsdl:output message="ns:cancelOrderResponse" wsaw:Action="urn:cancelOrderResponse"/>
+      </wsdl:operation>
+      <wsdl:operation name="getAvailableItems">
+         <wsdl:input message="ns:getAvailableItemsRequest"
+                     wsaw:Action="urn:getAvailableItems"/>
+         <wsdl:output message="ns:getAvailableItemsResponse"
+                      wsaw:Action="urn:getAvailableItemsResponse"/>
+      </wsdl:operation>
+      <wsdl:operation name="hasItem">
+         <wsdl:input message="ns:hasItemRequest" wsaw:Action="urn:hasItem"/>
+         <wsdl:output message="ns:hasItemResponse" wsaw:Action="urn:hasItemResponse"/>
+      </wsdl:operation>
+      <wsdl:operation name="payForOrder">
+         <wsdl:input message="ns:payForOrderRequest" wsaw:Action="urn:payForOrder"/>
+      </wsdl:operation>
+      <wsdl:operation name="getPaymentAmount">
+         <wsdl:input message="ns:getPaymentAmountRequest" wsaw:Action="urn:getPaymentAmount"/>
+         <wsdl:output message="ns:getPaymentAmountResponse"
+                      wsaw:Action="urn:getPaymentAmountResponse"/>
+      </wsdl:operation>
+      <wsdl:operation name="login">
+         <wsdl:input message="ns:loginRequest" wsaw:Action="urn:login"/>
+         <wsdl:output message="ns:loginResponse" wsaw:Action="urn:loginResponse"/>
+      </wsdl:operation>
+      <wsdl:operation name="buyItem">
+         <wsdl:input message="ns:buyItemRequest" wsaw:Action="urn:buyItem"/>
+         <wsdl:output message="ns:buyItemResponse" wsaw:Action="urn:buyItemResponse"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="OrderProcessingSoap11Binding" type="ns:OrderProcessingPortType">
+      <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+      <wsdl:operation name="cancelOrder">
+         <soap:operation soapAction="urn:cancelOrder" style="document"/>
+         <wsdl:input>
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="getAvailableItems">
+         <soap:operation soapAction="urn:getAvailableItems" style="document"/>
+         <wsdl:input>
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="hasItem">
+         <soap:operation soapAction="urn:hasItem" style="document"/>
+         <wsdl:input>
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="payForOrder">
+         <soap:operation soapAction="urn:payForOrder" style="document"/>
+         <wsdl:input>
+            <soap:body use="literal"/>
+         </wsdl:input>
+      </wsdl:operation>
+      <wsdl:operation name="getPaymentAmount">
+         <soap:operation soapAction="urn:getPaymentAmount" style="document"/>
+         <wsdl:input>
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="login">
+         <soap:operation soapAction="urn:login" style="document"/>
+         <wsdl:input>
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="buyItem">
+         <soap:operation soapAction="urn:buyItem" style="document"/>
+         <wsdl:input>
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:binding name="OrderProcessingSoap12Binding" type="ns:OrderProcessingPortType">
+      <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+      <wsdl:operation name="cancelOrder">
+         <soap12:operation soapAction="urn:cancelOrder" style="document"/>
+         <wsdl:input>
+            <soap12:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="getAvailableItems">
+         <soap12:operation soapAction="urn:getAvailableItems" style="document"/>
+         <wsdl:input>
+            <soap12:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="hasItem">
+         <soap12:operation soapAction="urn:hasItem" style="document"/>
+         <wsdl:input>
+            <soap12:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="payForOrder">
+         <soap12:operation soapAction="urn:payForOrder" style="document"/>
+         <wsdl:input>
+            <soap12:body use="literal"/>
+         </wsdl:input>
+      </wsdl:operation>
+      <wsdl:operation name="getPaymentAmount">
+         <soap12:operation soapAction="urn:getPaymentAmount" style="document"/>
+         <wsdl:input>
+            <soap12:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="login">
+         <soap12:operation soapAction="urn:login" style="document"/>
+         <wsdl:input>
+            <soap12:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="buyItem">
+         <soap12:operation soapAction="urn:buyItem" style="document"/>
+         <wsdl:input>
+            <soap12:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap12:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:binding name="OrderProcessingHttpBinding" type="ns:OrderProcessingPortType">
+      <http:binding verb="POST"/>
+      <wsdl:operation name="cancelOrder">
+         <http:operation location="cancelOrder"/>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"/>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="getAvailableItems">
+         <http:operation location="getAvailableItems"/>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"/>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="hasItem">
+         <http:operation location="hasItem"/>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"/>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="payForOrder">
+         <http:operation location="payForOrder"/>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"/>
+         </wsdl:input>
+      </wsdl:operation>
+      <wsdl:operation name="getPaymentAmount">
+         <http:operation location="getPaymentAmount"/>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"/>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="login">
+         <http:operation location="login"/>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"/>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"/>
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="buyItem">
+         <http:operation location="buyItem"/>
+         <wsdl:input>
+            <mime:content type="text/xml" part="parameters"/>
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" part="parameters"/>
+         </wsdl:output>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:service name="OrderProcessing">
+      <wsdl:port name="OrderProcessingHttpSoap11Endpoint"
+                 binding="ns:OrderProcessingSoap11Binding">
+         <soap:address location="http://10.100.7.132:9000/services/OrderProcessing.OrderProcessingHttpSoap11Endpoint"/>
+      </wsdl:port>
+      <wsdl:port name="OrderProcessingHttpsSoap11Endpoint"
+                 binding="ns:OrderProcessingSoap11Binding">
+         <soap:address location="https://10.100.7.132:9002/services/OrderProcessing.OrderProcessingHttpsSoap11Endpoint"/>
+      </wsdl:port>
+      <wsdl:port name="OrderProcessingHttpsSoap12Endpoint"
+                 binding="ns:OrderProcessingSoap12Binding">
+         <soap12:address location="https://10.100.7.132:9002/services/OrderProcessing.OrderProcessingHttpsSoap12Endpoint"/>
+      </wsdl:port>
+      <wsdl:port name="OrderProcessingHttpSoap12Endpoint"
+                 binding="ns:OrderProcessingSoap12Binding">
+         <soap12:address location="http://10.100.7.132:9000/services/OrderProcessing.OrderProcessingHttpSoap12Endpoint"/>
+      </wsdl:port>
+      <wsdl:port name="OrderProcessingHttpEndpoint"
+                 binding="ns:OrderProcessingHttpBinding">
+         <http:address location="http://10.100.7.132:9000/services/OrderProcessing.OrderProcessingHttpEndpoint"/>
+      </wsdl:port>
+      <wsdl:port name="OrderProcessingHttpsEndpoint"
+                 binding="ns:OrderProcessingHttpBinding">
+         <http:address location="https://10.100.7.132:9002/services/OrderProcessing.OrderProcessingHttpsEndpoint"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>

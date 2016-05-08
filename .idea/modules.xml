@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/WSO2-Carbon-Order-Manager.iml" filepath="$PROJECT_DIR$/WSO2-Carbon-Order-Manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WSO2-Carbon-Order-Manager-Components/WSO2-Carbon-Order-Manager-Components.iml" filepath="$PROJECT_DIR$/WSO2-Carbon-Order-Manager-Components/WSO2-Carbon-Order-Manager-Components.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WSO2-Carbon-Order-Manager-Components/org.wso2.carbon.order.mgt/org.wso2.carbon.order.mgt.iml" filepath="$PROJECT_DIR$/WSO2-Carbon-Order-Manager-Components/org.wso2.carbon.order.mgt/org.wso2.carbon.order.mgt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WSO2-Carbon-Order-Manager-Components/org.wso2.carbon.order.stub/org.wso2.carbon.order.stub.iml" filepath="$PROJECT_DIR$/WSO2-Carbon-Order-Manager-Components/org.wso2.carbon.order.stub/org.wso2.carbon.order.stub.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WSO2-Carbon-Order-Manager-Components/org.wso2.carbon.order.ui/org.wso2.carbon.order.ui.iml" filepath="$PROJECT_DIR$/WSO2-Carbon-Order-Manager-Components/org.wso2.carbon.order.ui/org.wso2.carbon.order.ui.iml" />
+    </modules>
+  </component>
+</project>
